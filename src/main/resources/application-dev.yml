@@ -45,12 +45,10 @@ spring:
           max-wait: 5000
           test-on-borrow: true
 
-#1：value="create-drop" 表示当JPA应用的时候自动创建表，在解应用的时候删除相应的表，这个在做测试的时候比较有用，但在开发过程中不这么用
-#2：value="create"这个在每次应用启动的时候都会创建数据库表（会删除以前数据库里的数据。
-#3：value="update" 这个属性的作用是a:每次只会更新数据库表里的信息
+
   jpa:
       show-sql: true
       properties:
         hibernate:
            hbm2ddl:
-               auto: update
+               auto: update #1：value="create-drop" 表示当JPA应用的时候自动创建表，在解应用的时候删除相应的表，这个在做测试的时候比较有用，但在开发过程中不这么用。2：value="create"这个在每次应用启动的时候都会创建数据库表（会删除以前数据库里的数据。。3：value="update" 这个属性的作用是a:每次只会更新数据库表里的信息
