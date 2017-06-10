@@ -2,6 +2,7 @@ package com.biostime.controller;
 
 import com.biostime.domain.test1.User;
 import com.biostime.service.test1.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,8 @@ import java.util.*;
  * Created by 13006 on 2017/6/9.
  */
 @RestController
+//@Api(value = "用户类",tags = "用户接口")
+@RequestMapping("act")
 public class UserController {
 
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
@@ -22,7 +25,7 @@ public class UserController {
     UserService userService;
 
     //http://127.0.0.1:8080/user?id=1
-    @RequestMapping("/user")
+    /*@RequestMapping("/user")
     public User query(Long id) {
         return userService.findOne(id);
     }
@@ -35,15 +38,15 @@ public class UserController {
     @RequestMapping(name = "/all")
     public List<User> getList() {
         return userService.findAll();
-    }
+    }*/
 
     @ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
     @ApiImplicitParams({
-                    @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Long"),
-                    @ApiImplicitParam(name = "name", value = "用户姓名", required = true, dataType = "String"),
-                    @ApiImplicitParam(name = "age", value = "用户年龄", required = true, dataType = "Integer")
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "name", value = "用户姓名", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "age", value = "用户年龄", required = true, dataType = "Integer")
     })
-    @RequestMapping(name = "/{id}/{name}/{age}", method = RequestMethod.GET)
+    @RequestMapping(name = "/user/{id}/{name}/{age}", method = RequestMethod.GET)
     public User queryUser(@PathVariable Long id, @PathVariable String name, @PathVariable Integer age) {
         return userService.findUser(id, name, age);
     }
@@ -53,7 +56,7 @@ public class UserController {
             @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long"),
             @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     })
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value="/user/{id}", method=RequestMethod.PUT)
     public String putUser(@PathVariable Long id, @RequestBody User user) {
         User u = users.get(id);
         u.setName(user.getName());
@@ -64,14 +67,14 @@ public class UserController {
 
     @ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    @RequestMapping(value="/user/{id}", method=RequestMethod.DELETE)
     public String deleteUser(@PathVariable Long id) {
         users.remove(id);
         return "success";
     }
 
     @ApiOperation(value="获取用户列表", notes="")
-    @RequestMapping(value={""}, method=RequestMethod.GET)
+    @RequestMapping(value={"/getUserList"}, method=RequestMethod.GET)
     public List<User> getUserList() {
         List<User> r = new ArrayList<User>(users.values());
         return r;
@@ -87,7 +90,7 @@ public class UserController {
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/user/{id}", method=RequestMethod.GET)
     public User getUser(@PathVariable Long id) {
         return users.get(id);
     }
