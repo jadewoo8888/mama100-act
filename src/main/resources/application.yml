@@ -1,0 +1,21 @@
+server:
+    port: 8080
+    context-path: / #配置访问路径，默认为/
+    session-timeout: 30 #用户回话session过期时间，以秒为单位
+    tomcat:
+      uri-encoding: UTF-8 #配置tomcat编码，默认为UTF-8
+      compression: on #tomcat 是否开启压缩，默认为关闭 off
+spring:
+    profiles:
+        active: dev #指定活动的Profile为application-dev.yml。（application-{profile}.yml）
+    http:
+        encoding:
+            force: true
+
+endpoints:
+    shutdown:
+        enabled: true
+        sensitive: false
+management:
+    security:
+        enabled: false
