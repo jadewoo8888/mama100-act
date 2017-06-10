@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 
-
+    User findByIdAndNameAndAge(Long id, String name, Integer age);
 }

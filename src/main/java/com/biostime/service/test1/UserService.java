@@ -35,4 +35,8 @@ public class UserService {
     public User findOne(Long id) {
         return userRepository.findOne(id);
     }
+
+    public User findUser(Long id, String name, Integer age) {
+        return userRepository.findByIdAndNameAndAge(id, name, age);
+    }
 }

@@ -1,0 +1,56 @@
+package com.biostime.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import static com.google.common.base.Predicates.and;
+
+/**
+ * Created by 13006 on 2017/6/10.
+ */
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+
+    /*@Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.biostime.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }*/
+
+    @Bean
+    public Docket TestApi() {
+        return new Docket(DocumentationType.SWAGGER_2).useDefaultResponseMessages(false)
+                .groupName("妈妈100-act")
+                .apiInfo(apiInfo())
+                .select()
+                .apis(and(RequestHandlerSelectors.basePackage("com.biostime.controller"),
+                        RequestHandlerSelectors.withClassAnnotation(RestController.class)))
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("妈妈100-act API")
+                .description(""
+                        + "<br>系统名称：妈妈100活动"
+                        + "<br>定位：属于应用和基础服务的中间层，基于SpringBoot的RESTFUL风格的web服务。"
+                        + "")
+                //.termsOfServiceUrl("no terms of service")
+                .version("1.0")
+                .build();
+    }
+
+}
