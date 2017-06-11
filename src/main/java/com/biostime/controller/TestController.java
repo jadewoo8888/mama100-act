@@ -1,7 +1,10 @@
 package com.biostime.controller;
 
+import com.biostime.controller.base.BaseController;
 import com.biostime.domain.test1.User;
-import io.swagger.annotations.Api;
+import com.biostime.request.TestUserReq;
+import com.biostime.response.TestUserRes;
+import com.biostime.response.base.BaseActRes;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -14,15 +17,16 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 @RequestMapping("act")
 //@Api(value = "测试类",tags = "测试接口")
-public class TestController {
+public class TestController extends BaseController {
 
-    @ApiOperation(value="创建用户", notes="根据User对象创建用户")
-    @ApiImplicitParam(dataType = "java.lang.Long", name = "id", value = "id", required = true, paramType = "path")
+    @ApiOperation(value="创建用户1", notes="根据User对象创建用户")
+    @ApiImplicitParam(name = "id", value = "用户id", required = true, paramType = "path")
     @RequestMapping(value = "/test/str/{id}",method = RequestMethod.POST)
-    public String getStr(@PathVariable Long id){
+    public BaseActRes getStr(@PathVariable Long id){
+        BaseActRes<String> res = new BaseActRes<>();
 
-
-        return "aa";
+        res.setData(id.toString());
+        return res;
     }
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
@@ -46,7 +50,22 @@ public class TestController {
         return user;
     }
 
+    @ApiOperation(value="创建用户TestUserReq", notes="根据User对象创建用户")
+    @ApiImplicitParam(dataType = "java.lang.Long", name = "id", value = "id", required = true, paramType = "path")
+    @RequestMapping(value = "/test/req/{id}",method = RequestMethod.POST)
+    public BaseActRes<TestUserRes> save(@PathVariable Long id, @RequestBody TestUserReq userReq){
 
+        BaseActRes<TestUserRes> res = new BaseActRes<>();
+
+        System.out.println("id:"+id+", user:"+userReq);
+        //user.setId(id);
+        TestUserRes userRes = new TestUserRes();
+        userRes.setId(userReq.getId());
+        userRes.setAge(userReq.getAge());
+        userRes.setName(userReq.getName());
+        res.setData(userRes);
+        return res;
+    }
 
     @ApiIgnore
     @ApiOperation(value="删除指定id用户", notes="根据id来删除用户信息")
