@@ -16,66 +16,11 @@ import static com.google.common.base.Predicates.and;
 
 /**
  * Created by 13006 on 2017/6/10.
+ * 访问路径：ip:端口/swagger-ui.html
  */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-
-    /*@Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.biostime.controller"))
-                .paths(PathSelectors.any())
-                .build();
-    }*/
-
-    /*@Bean
-    public Docket TestApi() {
-        return new Docket(DocumentationType.SWAGGER_2).useDefaultResponseMessages(false)
-                .groupName("妈妈100-act")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(and(RequestHandlerSelectors.basePackage("com.biostime.controller"),
-                        RequestHandlerSelectors.withClassAnnotation(RestController.class)))
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("妈妈100-act API")
-                .description(""
-                        + "<br>系统名称：妈妈100活动"
-                        + "<br>定位：属于应用和基础服务的中间层，基于SpringBoot的RESTFUL风格的web服务。"
-                        + "")
-                //.termsOfServiceUrl("no terms of service")
-                .version("1.0")
-                .build();
-    }*/
-
-    /**
-     * 可以定义多个组，比如本类中定义把test和demo区分开了 （访问页面就可以看到效果了）
-     *
-     */
-    /*@Bean
-    public Docket testApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.biostime"))
-                .paths(PathSelectors.any()).build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("spring Boot 中构建RESTful API")
-                .termsOfServiceUrl("")
-                .contact("huguoju")
-                .version("1.0")
-                .build();
-    }*/
 
     @Bean
     public Docket createRestApi() {
