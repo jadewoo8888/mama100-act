@@ -1,10 +1,13 @@
 package com.biostime.controller;
 
+import com.biostime.constant.Constant;
 import com.biostime.controller.base.BaseController;
 import com.biostime.domain.test1.User;
+import com.biostime.request.TestLoginReq;
 import com.biostime.request.TestUserReq;
 import com.biostime.response.TestUserRes;
 import com.biostime.response.base.BaseActRes;
+import com.biostime.response.base.UserInfoRes;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -74,5 +77,23 @@ public class TestController extends BaseController {
     public String delete(@PathVariable Long id){
         System.out.println("delete user:"+id);
         return "OK";
+    }
+
+    @ApiOperation(value="测试登录", notes="")
+    @RequestMapping(value = "/test/login", method = RequestMethod.POST)
+    public BaseActRes<String> testLogin(@RequestBody TestLoginReq loginReq) {
+        BaseActRes<String> res = new BaseActRes<>();
+        UserInfoRes u = getUserInfo(loginReq);
+        if(null == u || !Constant.SUCCESS.equals(u.getResponse().getCode())){
+            res.setCode(u.getResponse().getCode());
+            res.setDesc(u.getResponse().getDesc());
+            return res;
+        }
+        Long customerId = Long.parseLong(u.getResponse().getCustomerId());
+        res.setData(customerId+"");
+        res.setCode(Constant.SUCCESS);
+        res.setSeqNo(loginReq.getSeqNo());
+        res.setDesc("测试登录");
+        return res;
     }
 }
