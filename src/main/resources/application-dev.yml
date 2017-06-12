@@ -53,6 +53,24 @@ spring:
            hbm2ddl:
                auto: update #1：value="create-drop" 表示当JPA应用的时候自动创建表，在解应用的时候删除相应的表，这个在做测试的时候比较有用，但在开发过程中不这么用。2：value="create"这个在每次应用启动的时候都会创建数据库表（会删除以前数据库里的数据。。3：value="update" 这个属性的作用是a:每次只会更新数据库表里的信息
 
+  redis:
+        database: 2
+        hostName: test02-redis.biostime.it
+        port: 6379
+        timeout: 15000
+        pool:
+            max-idle: 10
+            min-idle: 5
+            max-active: 100
+            max-wait: 3000
+        defaultExpiration: 3600
+  devtools:
+        restart:
+            #热部署生效
+          enabled: true
+          additional-paths: src/main/java #设置重启的目录
+          exclude: WEB-INF/** #classpath目录下的WEB-INF文件夹内容修改不重启。设置WEB-INF下的jsp修改不需要重启
 o2o:
     base:
         url: http://appa.mama100.cn
+
