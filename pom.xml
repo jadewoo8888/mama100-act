@@ -94,6 +94,29 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>com.mama100.rpc.merchandise</groupId>
+			<artifactId>merchandise-business-interface-spring</artifactId>
+			<version>2.0.3-RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.biostime</groupId>
+			<artifactId>coupon-rpc-client</artifactId>
+			<version>5.5.5.1-RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.mama100.rpc.order</groupId>
+			<artifactId>interface-order</artifactId>
+			<version>1.0.3.2-SNAPSHOT</version>
+		</dependency>
+
 		<!-- devtools可以实现页面热部署（即页面修改后会立即生效，这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现），
 			实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。 即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），注意：因为其采用的虚拟机机制，该项重启是很快的 -->
 		<dependency>
@@ -102,11 +125,7 @@
 			<optional>true</optional><!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->
 		</dependency>
 
-		<!--<dependency>
-			<groupId>com.mama100.rpc.merchandise</groupId>
-			<artifactId>merchandise-business-interface-spring</artifactId>
-			<version>1.8.1-RELEASE</version>
-		</dependency>-->
+
 	</dependencies>
 
 	<build>
@@ -123,6 +142,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
 					<!--fork : 如果没有该项配置，devtools在eclipse中还不起作用，即应用不会restart -->
 					<fork>true</fork>
 				</configuration>

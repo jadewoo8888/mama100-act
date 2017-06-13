@@ -70,6 +70,18 @@ spring:
           enabled: true
           additional-paths: src/main/java #设置重启的目录
           exclude: WEB-INF/** #classpath目录下的WEB-INF文件夹内容修改不重启。设置WEB-INF下的jsp修改不需要重启
+
+rpc:
+    zookeeper:
+        sku:
+            zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
+            namespace: /rpc/merchandise/merger_test
+        coupon:
+            zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
+            namespace: /rpc/coupon/dev
+        order:
+            zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
+            namespace: /rpc/order/finagle
 o2o:
     base:
         url: http://appa.mama100.cn
