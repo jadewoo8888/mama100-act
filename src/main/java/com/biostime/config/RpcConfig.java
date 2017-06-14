@@ -1,6 +1,7 @@
 package com.biostime.config;
 
 import com.biostime.coupon.rpc.RpcFactory;
+import com.biostime.transaction.rpc.TransactionRpcFactory;
 import com.mama100.common.finagle.FinagleClientRegister;
 import com.mama100.merchandise.enums.FromSystem;
 import com.mama100.order.rpc.OrderRpcJavaFactory;
@@ -58,6 +59,7 @@ public class RpcConfig {
 		couponRpcFactory.setFinagleClientRegister(couponRegister());
 		return couponRpcFactory;
 	}
+
 	/**
 	 * 订单RPC注册
 	 * @return
@@ -71,6 +73,22 @@ public class RpcConfig {
 	public OrderRpcJavaFactory orderRpcJavaFactory(){
 		OrderRpcJavaFactory factory = new OrderRpcJavaFactory();
 		factory.setFinagleClientRegister(orderRegister());
+		return factory;
+	}
+
+	/**
+	 * 积分RPC注册
+	 * @return
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "rpc.zookeeper.point")
+	public FinagleClientRegister pointRegister(){
+		return finagleClientRegister();
+	}
+	@Bean
+	public TransactionRpcFactory transactionRpcFactory(){
+		TransactionRpcFactory factory = new TransactionRpcFactory();
+		factory.setRegister(pointRegister());
 		return factory;
 	}
 }

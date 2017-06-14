@@ -82,6 +82,9 @@ rpc:
         order:
             zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
             namespace: /rpc/order/finagle
+        point:
+            zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
+            namespace: /rpc/transaction/core
 o2o:
     base:
         url: http://appa.mama100.cn
