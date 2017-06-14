@@ -25,9 +25,20 @@
 	</properties>
 
 	<dependencies>
+		<!-- 去掉默认日志logback，改用log4j2 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 
 		<dependency>
@@ -117,6 +128,22 @@
 			<version>1.0.3.2-SNAPSHOT</version>
 		</dependency>
 
+		<!-- 积分接口 start -->
+		<dependency>
+			<groupId>com.biostime</groupId>
+			<artifactId>transactionRPC-interface</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.biostime</groupId>
+			<artifactId>transactionRPC-client</artifactId>
+		</dependency>
+
+		<!-- 日志归集插件 -->
+		<!--<dependency>
+			<groupId>com.biostime.loghouse</groupId>
+			<artifactId>loghouse-plugin</artifactId>
+			<version>1.0.0-RELEASE</version>
+		</dependency>-->
 		<!-- devtools可以实现页面热部署（即页面修改后会立即生效，这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现），
 			实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。 即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），注意：因为其采用的虚拟机机制，该项重启是很快的 -->
 		<dependency>
