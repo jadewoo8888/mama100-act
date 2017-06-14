@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="info" name="snsec_groupon"  packages="com.biostime.loghouse.plugin">
+<configuration status="info" name="mama100app-act"  packages="com.biostime.loghouse.plugin">
     <appenders>
         <Console name="console" target="SYSTEM_OUT">
-            <LogHouseLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %c.%method-%L %t %ipx %sx{MC} %ax{snsec_groupon}  MDC%X %msg %n"/>
+            <LogHouseLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %c.%method-%L %t %ipx %sx{MC} %ax{mama100app-act}  MDC%X %msg %n"/>
         </Console>
-        <RollingFile name="loghouseAppender" fileName="/opt/logs/snsec_groupon/application.log" filePattern="/opt/logs/snsec_groupon/application.log.%d{yyyy-MM-dd}">
-            <LogHouseLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %c.%method-%L %t %ipx %sx{MC} %ax{snsec_groupon}  MDC%X %msg %n" />
+        <RollingFile name="loghouseAppender" fileName="/opt/logs/mama100app-act/application.log" filePattern="/opt/logs/mama100app-act/application.log.%d{yyyy-MM-dd}">
+            <LogHouseLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %c.%method-%L %t %ipx %sx{MC} %ax{mama100app-act}  MDC%X %msg %n" />
             <ThresholdFilter level="trace" onMatch="ACCEPT" />
             <Policies>
                 <SizeBasedTriggeringPolicy size="20 MB" />
