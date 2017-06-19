@@ -104,13 +104,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<!-- 商品库接口 -->
 		<dependency>
 			<groupId>com.mama100.rpc.merchandise</groupId>
 			<artifactId>merchandise-business-interface-spring</artifactId>
 			<version>2.0.3-RELEASE</version>
 		</dependency>
-
+		<!-- 优惠券接口 -->
 		<dependency>
 			<groupId>com.biostime</groupId>
 			<artifactId>coupon-rpc-client</artifactId>
@@ -122,6 +122,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- 订单接口 -->
 		<dependency>
 			<groupId>com.mama100.rpc.order</groupId>
 			<artifactId>interface-order</artifactId>
@@ -132,12 +133,14 @@
 		<dependency>
 			<groupId>com.biostime</groupId>
 			<artifactId>transactionRPC-interface</artifactId>
+			<version>1.7.0-RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.biostime</groupId>
 			<artifactId>transactionRPC-client</artifactId>
+			<version>1.7.0-RELEASE</version>
 		</dependency>
-
+		<!-- 积分接口 end -->
 		<!-- 日志归集插件 -->
 		<dependency>
 			<groupId>com.biostime.loghouse</groupId>
