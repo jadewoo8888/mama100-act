@@ -2,26 +2,29 @@ package com.biostime.controller;
 
 import com.biostime.constant.Constant;
 import com.biostime.controller.base.BaseController;
+import com.biostime.helper.ProductHelper;
+import com.biostime.response.BatchSubmitOrderRes;
 import com.biostime.response.TermSkuInfoRes;
 import com.biostime.response.base.BaseActRes;
 
 import com.biostime.service.test1.rpc.CouponService;
+import com.biostime.service.test1.rpc.OrderRpcService;
 import com.biostime.service.test1.rpc.PointService;
 import com.biostime.service.test1.rpc.ProductService;
 import com.biostime.transaction.rpc.thrift.request.CustomerPointRequest;
-import com.biostime.util.LoggerUtil;
+import com.biostime.util.NumberUtil;
+import com.mama100.order.rpc.bean.*;
+import com.mama100.order.rpc.thrift.inout.common.*;
 import com.mama100.rpc.merchandise.thrift.inout.FSku;
-import com.mama100.rpc.merchandise.thrift.inout.FTerminal;
 import com.mama100.rpc.merchandise.thrift.inout.FTerminalSKU;
-import com.mama100.rpc.merchandise.thrift.inout.FTerminalSKUGallery;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 13006 on 2017/6/13.
@@ -36,6 +39,8 @@ public class TestRpcController extends BaseController {
     PointService pointService;
     @Resource
     ProductService skuService;
+    @Resource
+    OrderRpcService orderRpcService;
 
     @ApiOperation(value="测试送优惠券rpc", notes="")
     @RequestMapping(value = "/rpc/coupon",method = RequestMethod.GET)
@@ -103,4 +108,61 @@ public class TestRpcController extends BaseController {
         res.setDesc("ok");
         return res;
     }
+
+    @ApiOperation(value="测试下单rpc", notes="")
+    @RequestMapping(value = "/rpc/batchSubmitOrder",method = RequestMethod.GET)
+    public BaseActRes<BatchSubmitOrderRes> batchSubmitOrder() throws Exception {
+        BaseActRes<BatchSubmitOrderRes> res = new BaseActRes<>();
+
+        // 收货人信息
+        OrderReceiverBean orderReciverBean = new OrderReceiverBean();
+        orderReciverBean.setReceiver("小吴");
+        orderReciverBean.setContactMobile("18565338848");
+        orderReciverBean.setReceiverAddress("雷州市北京镇上海村");
+        orderReciverBean.setProvinceCode("440000000000");
+        orderReciverBean.setCityCode("440100000000");
+        orderReciverBean.setDistrictCode("440106000000");
+
+        //添加身份证信息
+        Map<String, String> tradeAttr = new HashMap<String, String>();
+        tradeAttr.put("idtype", "2");// 证件类型  //变量
+        tradeAttr.put("idno", "440882199909098888");//身份证号 //变量
+        tradeAttr.put("custName", "吴迪");  //姓名 //变量
+
+        FTerminalSKU fTerminalSKU = skuService.getFTerminalSKU("912721",223407L);
+
+        Long customerId = 32737223L;
+        OrderBatchSubmitResponse orderBatchSubmitResponse = orderRpcService.orderBatchSubmit(customerId,fTerminalSKU,orderReciverBean, tradeAttr);
+        //logger.info("下单:proOrderCode="+orderBatchSubmitResponse.getBatchSubmitOrderCode()+"  proOrdeRespDesc:"+orderBatchSubmitResponse.getBaseResp().getRespDesc());
+        //下单成功
+        if(null != orderBatchSubmitResponse && Constant.SUCCESS.equals(orderBatchSubmitResponse.getBaseResp().getRespCode()) && StringUtils.isNotBlank(orderBatchSubmitResponse.getBatchSubmitOrderCode())) {
+            String proOrderCode = orderBatchSubmitResponse.getBatchSubmitOrderCode();
+
+            res.setDesc("下单成功！");
+            res.setCode(Constant.SUCCESS);
+            //调支付接口
+            OrderResponse payOrderResponse = orderRpcService.orderPay(proOrderCode, customerId, "2343433899e", null);
+            //logger.info("下单支付:payOrderRespDesc="+payOrderResponse.getBaseResp().getRespDesc());
+            //支付成功
+            if (null != payOrderResponse && Constant.SUCCESS.equals(payOrderResponse.getBaseResp().getRespCode())) {
+
+                BatchSubmitOrderRes batchSubmitOrderRes = new BatchSubmitOrderRes();
+                batchSubmitOrderRes.setTradeNo(proOrderCode);
+                batchSubmitOrderRes.setOnlinePayAmount(NumberUtil.formatFloat(orderBatchSubmitResponse.getOnlinePayAmount().floatValue()));
+                res.setData(batchSubmitOrderRes);
+
+                res.setDesc("下单支付成功！");
+                res.setCode(Constant.SUCCESS);
+            } else {
+                res.setDesc("下单支付失败！");
+                res.setCode(Constant.ERROR);
+            }
+        } else {
+            res.setCode(Constant.ERROR);
+            res.setDesc("下单失败！");
+        }
+
+        return res;
+    }
+
 }

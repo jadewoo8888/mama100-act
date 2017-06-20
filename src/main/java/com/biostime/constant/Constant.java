@@ -12,4 +12,6 @@ public class Constant {
 
 	public static final String COUPON_SUCCESS = "coupon100";
 
+	public static final String ONE = "1";
+
 }
