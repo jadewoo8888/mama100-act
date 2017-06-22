@@ -147,6 +147,18 @@
 			<version>1.7.0-RELEASE</version>
 		</dependency>
 		<!-- 积分接口 end -->
+		<!-- 会员接口 start -->
+		<dependency>
+			<groupId>com.mama100.rpc.cust</groupId>
+			<artifactId>cust-interface</artifactId>
+			<version>2.5.1-RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>scala-library</artifactId>
+					<groupId>org.scala-lang</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- 日志归集插件 -->
 		<dependency>
 			<groupId>com.biostime.loghouse</groupId>

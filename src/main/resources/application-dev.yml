@@ -85,6 +85,9 @@ rpc:
         point:
             zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
             namespace: /rpc/transaction/core
+        cust:
+            zookeeperAddress: test-zookeeper01.biostime.it:2181,test-zookeeper02.biostime.it:2181,test-zookeeper03.biostime.it:2181
+            namespace: /rpc/cust/core
 o2o:
     base:
         url: http://appa.mama100.cn

@@ -5,11 +5,7 @@ import com.biostime.controller.base.BaseController;
 import com.biostime.response.BatchSubmitOrderRes;
 import com.biostime.response.TermSkuInfoRes;
 import com.biostime.response.base.BaseActRes;
-
-import com.biostime.service.rpc.CouponService;
-import com.biostime.service.rpc.OrderRpcService;
-import com.biostime.service.rpc.PointService;
-import com.biostime.service.rpc.ProductService;
+import com.biostime.service.rpc.*;
 import com.biostime.transaction.rpc.thrift.request.CustomerPointRequest;
 import com.biostime.util.NumberUtil;
 import com.mama100.order.rpc.bean.*;
@@ -39,6 +35,8 @@ public class TestRpcController extends BaseController {
     ProductService skuService;
     @Resource
     OrderRpcService orderRpcService;
+    @Resource
+    CustService custService;
 
     @ApiOperation(value="测试送优惠券rpc", notes="")
     @RequestMapping(value = "/rpc/coupon",method = RequestMethod.GET)
@@ -160,6 +158,18 @@ public class TestRpcController extends BaseController {
             res.setDesc("下单失败！");
         }
 
+        return res;
+    }
+
+    @ApiOperation(value="测试会员rpc", notes="")
+    @RequestMapping(value = "/rpc/cust",method = RequestMethod.GET)
+    public BaseActRes<String> cust() throws Exception {
+        BaseActRes<String> res = new BaseActRes<>();
+        Long customerId = 32737223L;
+        String headerImg = custService.getCustAppHeaderImg(customerId, null);
+
+        res.setData(headerImg);
+        res.setCode(Constant.SUCCESS);
         return res;
     }
 

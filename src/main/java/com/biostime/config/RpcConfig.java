@@ -5,6 +5,7 @@ import com.biostime.transaction.rpc.TransactionRpcFactory;
 import com.mama100.common.finagle.FinagleClientRegister;
 import com.mama100.merchandise.enums.FromSystem;
 import com.mama100.order.rpc.OrderRpcJavaFactory;
+import com.mama100.rpc.cust.CustRpcFactory;
 import com.mama100.rpc.merchandise.MerchandiseRpcFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -89,6 +90,22 @@ public class RpcConfig {
 	public TransactionRpcFactory transactionRpcFactory(){
 		TransactionRpcFactory factory = new TransactionRpcFactory();
 		factory.setRegister(pointRegister());
+		return factory;
+	}
+
+	/**
+	 * 会员RPC注册
+	 * @return
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "rpc.zookeeper.cust")
+	public FinagleClientRegister custRegister(){
+		return finagleClientRegister();
+	}
+	@Bean
+	public CustRpcFactory custRpcFactory(){
+		CustRpcFactory factory = new CustRpcFactory();
+		factory.setFinagleClientRegister(custRegister());
 		return factory;
 	}
 }
