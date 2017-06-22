@@ -1,4 +1,4 @@
-package com.biostime.service.test1.rpc;
+package com.biostime.service.rpc;
 
 import com.biostime.helper.ProductHelper;
 import com.biostime.util.LoggerUtil;

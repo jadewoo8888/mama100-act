@@ -1,4 +1,4 @@
-package com.biostime.service.test1.rpc;
+package com.biostime.service.rpc;
 
 import com.biostime.transaction.inout.ApplicationSystem;
 import com.biostime.transaction.rpc.TransactionRpcFactory;

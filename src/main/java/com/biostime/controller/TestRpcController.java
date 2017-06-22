@@ -2,19 +2,17 @@ package com.biostime.controller;
 
 import com.biostime.constant.Constant;
 import com.biostime.controller.base.BaseController;
-import com.biostime.helper.ProductHelper;
 import com.biostime.response.BatchSubmitOrderRes;
 import com.biostime.response.TermSkuInfoRes;
 import com.biostime.response.base.BaseActRes;
 
-import com.biostime.service.test1.rpc.CouponService;
-import com.biostime.service.test1.rpc.OrderRpcService;
-import com.biostime.service.test1.rpc.PointService;
-import com.biostime.service.test1.rpc.ProductService;
+import com.biostime.service.rpc.CouponService;
+import com.biostime.service.rpc.OrderRpcService;
+import com.biostime.service.rpc.PointService;
+import com.biostime.service.rpc.ProductService;
 import com.biostime.transaction.rpc.thrift.request.CustomerPointRequest;
 import com.biostime.util.NumberUtil;
 import com.mama100.order.rpc.bean.*;
-import com.mama100.order.rpc.thrift.inout.common.*;
 import com.mama100.rpc.merchandise.thrift.inout.FSku;
 import com.mama100.rpc.merchandise.thrift.inout.FTerminalSKU;
 import io.swagger.annotations.ApiOperation;

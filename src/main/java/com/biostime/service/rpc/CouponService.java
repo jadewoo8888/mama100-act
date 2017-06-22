@@ -1,4 +1,4 @@
-package com.biostime.service.test1.rpc;
+package com.biostime.service.rpc;
 
 import com.biostime.constant.Constant;
 import com.biostime.coupon.rpc.RpcFactory;
