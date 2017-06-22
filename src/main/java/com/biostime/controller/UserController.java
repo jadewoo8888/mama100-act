@@ -1,8 +1,7 @@
 package com.biostime.controller;
 
-import com.biostime.domain.test1.User;
+import com.biostime.domain.mysql.User;
 import com.biostime.service.test1.UserService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;

@@ -1,10 +1,10 @@
 package com.biostime;
 
-import com.biostime.domain.test1.User;
-import com.biostime.domain.test2.Message;
-import com.biostime.repository.test1.UserRepository;
-import com.biostime.repository.test2.MessageRepository;
-import org.junit.Assert;
+
+import com.biostime.domain.mysql.User;
+import com.biostime.domain.oracle.Message;
+import com.biostime.repository.mysql.UserRepository;
+import com.biostime.repository.oracle.MessageRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +37,8 @@ public class Mama100ActApplicationTests {
 
 	@Test
 	public void test() throws Exception {
-
+		//userRepository.save(new User("aa2a", 10));
+		messageRepository.save(new Message("o1", "aaaaaa2aaaa"));
 		/*userRepository.save(new User("aaa", 10));
 		userRepository.save(new User("bbb", 20));
 		userRepository.save(new User("ccc", 30));

@@ -1,4 +1,4 @@
-package com.biostime.domain.test1;
+package com.biostime.domain.mysql;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

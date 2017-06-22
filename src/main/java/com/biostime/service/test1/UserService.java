@@ -1,7 +1,8 @@
 package com.biostime.service.test1;
 
-import com.biostime.domain.test1.User;
-import com.biostime.repository.test1.UserRepository;
+
+import com.biostime.domain.mysql.User;
+import com.biostime.repository.mysql.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

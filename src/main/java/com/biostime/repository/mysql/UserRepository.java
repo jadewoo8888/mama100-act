@@ -1,6 +1,6 @@
-package com.biostime.repository.test1;
+package com.biostime.repository.mysql;
 
-import com.biostime.domain.test1.User;
+import com.biostime.domain.mysql.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

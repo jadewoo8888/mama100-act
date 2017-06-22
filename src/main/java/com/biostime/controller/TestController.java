@@ -2,7 +2,7 @@ package com.biostime.controller;
 
 import com.biostime.constant.Constant;
 import com.biostime.controller.base.BaseController;
-import com.biostime.domain.test1.User;
+import com.biostime.domain.mysql.User;
 import com.biostime.request.TestLoginReq;
 import com.biostime.request.TestUserReq;
 import com.biostime.response.TestUserRes;

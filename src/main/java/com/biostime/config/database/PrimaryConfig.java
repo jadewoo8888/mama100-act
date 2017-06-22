@@ -17,15 +17,12 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Map;
 
-/**
- * Created by 13006 on 2017/6/8.
- */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
         entityManagerFactoryRef="entityManagerFactoryPrimary",
         transactionManagerRef="transactionManagerPrimary",
-        basePackages= { "com.biostime.repository.test1" }) //设置Repository所在位置
+        basePackages= { "com.biostime.repository.mysql" }) //设置Repository所在位置
 public class PrimaryConfig {
 
     @Autowired
@@ -44,7 +41,7 @@ public class PrimaryConfig {
         return builder
                 .dataSource(primaryDataSource)
                 .properties(getVendorProperties(primaryDataSource))
-                .packages("com.biostime.domain.test1") //设置实体类所在位置
+                .packages("com.biostime.domain.mysql") //设置实体类所在位置
                 .persistenceUnit("primaryPersistenceUnit")
                 .build();
     }
@@ -53,7 +50,9 @@ public class PrimaryConfig {
     private JpaProperties jpaProperties;
 
     private Map<String, String> getVendorProperties(DataSource dataSource) {
-        return jpaProperties.getHibernateProperties(dataSource);
+        Map<String, String> stringStringMap = jpaProperties.getHibernateProperties(dataSource);
+        stringStringMap.put("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
+        return stringStringMap;
     }
 
     @Primary

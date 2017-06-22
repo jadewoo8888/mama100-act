@@ -1,6 +1,6 @@
-package com.biostime.repository.test2;
+package com.biostime.repository.oracle;
 
-import com.biostime.domain.test2.Message;
+import com.biostime.domain.oracle.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

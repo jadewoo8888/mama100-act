@@ -16,15 +16,12 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Map;
 
-/**
- * Created by 13006 on 2017/6/8.
- */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
         entityManagerFactoryRef="entityManagerFactorySecondary",
         transactionManagerRef="transactionManagerSecondary",
-        basePackages= { "com.biostime.repository.test2" }) //设置Repository所在位置
+        basePackages= { "com.biostime.repository.oracle" }) //设置Repository所在位置
 public class SecondaryConfig {
 
     @Autowired
@@ -41,7 +38,7 @@ public class SecondaryConfig {
         return builder
                 .dataSource(secondaryDataSource)
                 .properties(getVendorProperties(secondaryDataSource))
-                .packages("com.biostime.domain.test2") //设置实体类所在位置
+                .packages("com.biostime.domain.oracle") //设置实体类所在位置
                 .persistenceUnit("secondaryPersistenceUnit")
                 .build();
     }
@@ -50,7 +47,9 @@ public class SecondaryConfig {
     private JpaProperties jpaProperties;
 
     private Map<String, String> getVendorProperties(DataSource dataSource) {
-        return jpaProperties.getHibernateProperties(dataSource);
+        Map<String, String> stringStringMap = jpaProperties.getHibernateProperties(dataSource);
+        stringStringMap.put("hibernate.dialect","org.hibernate.dialect.OracleDialect");
+        return stringStringMap;
     }
 
     @Bean(name = "transactionManagerSecondary")

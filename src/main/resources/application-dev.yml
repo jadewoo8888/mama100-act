@@ -24,10 +24,10 @@ spring:
           test-on-borrow: true
        secondary:
           type: com.alibaba.druid.pool.DruidDataSource
-          url: jdbc:mysql://localhost:3306/test2?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull
-          driver-class-name: com.mysql.jdbc.Driver
-          username: root
-          password:
+          url: jdbc:oracle:thin:@test-oracle.biostime.it:1521:mama100
+          driver-class-name: oracle.jdbc.driver.OracleDriver
+          username: MAMA100_OWNER
+          password: DFIcieAIO0Mg2M
           initialSize: 5
           minIdle: 5
           maxActive: 10
